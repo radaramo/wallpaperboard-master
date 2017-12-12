@@ -29,7 +29,7 @@
     <group android:id="@+id/optional"
         android:checkableBehavior="single">
 
-        <item
+      <!--  <item
             android:id="@+id/navigation_view_donate"
             android:icon="@drawable/ic_drawer_donate"
             android:title="@string/navigation_view_donate"/>
@@ -42,7 +42,7 @@
         <item
             android:id="@+id/navigation_view_rate"
             android:icon="@drawable/ic_drawer_rate_review"
-            android:title="@string/navigation_view_rate"/>
+            android:title="@string/navigation_view_rate"/>-->
 
         <item
             android:id="@+id/padding"
