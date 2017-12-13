@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="idaplicacion">ca-app-pub-2320065636137009~2577797855</string>
+    <string name="banner1">ca-app-pub-2320065636137009/2363488515</string>
+    <string name="intersticial1">ca-app-pub-2320065636137009/4078807128</string>
+
     <!-- Navigation View -->
     <string name="navigation_view_wallpapers">Wallpapers</string>
     <string name="navigation_view_favorites">Favorites</string>

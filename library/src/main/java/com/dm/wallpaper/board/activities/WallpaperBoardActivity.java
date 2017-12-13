@@ -69,6 +69,9 @@ import com.dm.wallpaper.board.utils.views.HeaderView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.io.File;
 
@@ -108,6 +111,7 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
 
     private String mFragmentTag;
     private int mPosition, mLastPosition;
+    private InterstitialAd mInterstitialAd;
 
     private ActivityConfiguration mConfig;
 
@@ -118,6 +122,18 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_board);
         ButterKnife.bind(this);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.intersticial1));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                displayInterstitial();
+            }
+        });
+
         startService(new Intent(this, WallpaperBoardService.class));
 
         //Todo: wait until google fix the issue, then enable wallpaper crop again on API 26+
@@ -186,6 +202,12 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
 
         if (mConfig.isLicenseCheckerEnabled() && !Preferences.get(this).isLicensed()) {
             finish();
+        }
+    }
+
+    public void displayInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
         }
     }
 
@@ -362,7 +384,7 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
             if (id == R.id.navigation_view_wallpapers) mPosition = 0;
             else if (id == R.id.navigation_view_favorites) mPosition = 1;
             else if (id == R.id.navigation_view_settings) mPosition = 2;
-            else if (id == R.id.navigation_view_about) mPosition = 3;
+           // else if (id == R.id.navigation_view_about) mPosition = 3;
 
            /* else if (id == R.id.navigation_view_donate) mPosition = 4;
             else if (id == R.id.navigation_view_share) {

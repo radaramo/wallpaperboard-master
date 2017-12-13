@@ -31,6 +31,9 @@ import com.dm.wallpaper.board.items.Wallpaper;
 import com.dm.wallpaper.board.preferences.Preferences;
 import com.danimahardhika.android.helpers.core.utils.LogUtil;
 import com.dm.wallpaper.board.utils.listeners.NavigationListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,7 @@ public class FavoritesFragment extends Fragment {
     ImageView mFavoriteEmpty;
     @BindView(R2.id.toolbar)
     Toolbar mToolbar;
+    private InterstitialAd mInterstitialAd;
 
     private AsyncTask mAsyncTask;
 
@@ -75,11 +79,28 @@ public class FavoritesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         ButterKnife.bind(this, view);
 
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId(getString(R.string.intersticial1));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                displayInterstitial();
+            }
+        });
+
         if (!Preferences.get(getActivity()).isShadowEnabled()) {
             View shadow = view.findViewById( R.id.shadow);
             if (shadow != null) shadow.setVisibility(View.GONE);
         }
         return view;
+    }
+
+    public void displayInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
     }
 
     @Override
