@@ -10,7 +10,7 @@
     <color name="darkColorAccent">#20AC6B</color>
 
     <!-- Splash Screen -->
-    <color name="splashColor">#F2F2F2</color>
+    <color name="splashColor">#FFFFFF</color>
 
     <!-- Toolbar -->
     <color name="toolbarIcon">#6E6E6E</color>
