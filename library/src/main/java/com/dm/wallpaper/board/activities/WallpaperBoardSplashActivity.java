@@ -18,6 +18,7 @@ import com.dm.wallpaper.board.R;
 import com.dm.wallpaper.board.activities.callbacks.SplashScreenCallback;
 import com.dm.wallpaper.board.activities.configurations.SplashScreenConfiguration;
 import com.danimahardhika.android.helpers.core.utils.LogUtil;
+import com.google.android.gms.ads.MobileAds;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
@@ -52,6 +53,9 @@ public abstract class WallpaperBoardSplashActivity extends AppCompatActivity imp
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        MobileAds.initialize(this, getString(R.string.idaplicacion));
+
         mConfig = onInit();
         initBottomText();
 
