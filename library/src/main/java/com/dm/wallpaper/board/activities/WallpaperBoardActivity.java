@@ -111,7 +111,6 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
 
     private String mFragmentTag;
     private int mPosition, mLastPosition;
-    private InterstitialAd mInterstitialAd;
 
     private ActivityConfiguration mConfig;
 
@@ -122,18 +121,6 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_board);
         ButterKnife.bind(this);
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.intersticial1));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                displayInterstitial();
-            }
-        });
-
         startService(new Intent(this, WallpaperBoardService.class));
 
         //Todo: wait until google fix the issue, then enable wallpaper crop again on API 26+
@@ -202,12 +189,6 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
 
         if (mConfig.isLicenseCheckerEnabled() && !Preferences.get(this).isLicensed()) {
             finish();
-        }
-    }
-
-    public void displayInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
         }
     }
 
