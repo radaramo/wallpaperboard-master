@@ -123,7 +123,6 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
         setContentView(R.layout.activity_wallpaper_board);
         ButterKnife.bind(this);
 
-
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.intersticial1));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
